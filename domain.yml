@@ -1,0 +1,92 @@
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- greet
+- goodbye
+- affirm
+- chat_feedback
+- end_feedback
+- transfer_to_cso
+- chat_shopping
+- chat_end
+- get_sentiment
+- get_answer
+- get_product_review_selection
+- chat_product_review_summary
+- review_type_good
+- review_type_bad
+- review_type_all
+slots:
+  asin:
+    type: unfeaturized
+  feedback:
+    type: text
+  product:
+    type: text
+  question:
+    type: text
+  review_type:
+    type: unfeaturized
+responses:
+  utter_greet:
+  - text: Hey! How are you?
+  utter_goodbye:
+  - text: Bye
+  utter_ask_asin:
+  - text: What is product ASIN?
+  utter_ask_feedback:
+  - text: What feedback do you have regarding our products or services?
+  utter_what_to_chat:
+  - buttons:
+    - payload: /chat_shopping
+      title: Enquire Product Info
+    - payload: /chat_product_review_summary
+      title: View Product Review Summary
+    - payload: /chat_feedback
+      title: Give Feedback
+    - payload: /chat_end
+      title: Bye
+    text: Hi, I am BS Bot. What do you like to chat?
+  utter_end_feedback:
+  - text: Thank you, we have noted you feedback..... Bye!
+  utter_ask_transfer_to_cso:
+  - buttons:
+    - payload: /transfer_to_cso
+      title: Yes, Please
+    - payload: /end_feedback
+      title: No, I am done
+    text: Would you like to talk to our staff to handle your case?
+  utter_transfer_to_cso:
+  - text: A moment please... I will connect you to our staff
+  utter_ask_question:
+  - text: What do you want to ask me about the electronic products?
+  utter_ask_product:
+  - text: Which product are your referring to?
+  utter_get_product:
+  - text: Which product?
+  utter_get_review_type:
+  - buttons:
+    - payload: /review_type_good
+      title: View Good Review
+    - payload: /review_type_bad
+      title: View Bad Review
+    - payload: /review_type_all
+      title: View Both Good and Bad Review
+    - payload: /chat_end
+      title: No, End This Chat
+    text: What type of review do you want to view? .... I may take up to a minute
+      to summarise the reviews after you clicked button. Please be patient :) ...
+  utter_chat_end:
+  - text: Chat again next time... bye!
+actions:
+- action_transfer_to_cso
+- action_get_product_review_summary
+- action_store_user_question
+- action_get_product_asin
+- action_slotset_product_review_type_good
+- action_slotset_product_review_type_bad
+- action_slotset_product_review_type_all
+forms:
+- question_form
+- feedback_form
